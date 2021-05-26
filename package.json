@@ -1,0 +1,19 @@
+{
+  "name": "quiz-app-vanilla-js",
+  "version": "1.0.0",
+  "description": "using notion-api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [
+    "quiz"
+  ],
+  "author": "MJ CARNAJE",
+  "license": "ISC",
+  "dependencies": {
+    "@notionhq/client": "^0.1.8",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  }
+}
