@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "generate_tailwindcss": "npx postcss ./public/css/tailwind.css -o ./public/css/style.css"
+    "build": "postcss public/css/tailwind.css -o public/css/style.css"
   },
   "keywords": [
     "quiz"
@@ -14,12 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "@notionhq/client": "^0.1.8",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
     "autoprefixer": "^10.2.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
-    "tailwindcss": "^2.1.2"
+    "tailwindcss": "^2.1.2",
+    "tailwindcss-cli": "^0.1.2"
   }
 }
