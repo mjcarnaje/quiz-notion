@@ -83,7 +83,7 @@ const UIController = (() => {
     renderHome: () => {
       const home = `
         <div class="mb-12 text-center">
-          <h1 class="text-7xl font-Inter font-extrabold  tracking-tight mb-8">Simple Quiz</h1>
+          <h1 class="text-7xl font-Inter font-extrabold  tracking-tight mb-8">Simple Quiz Application</h1>
           <p class="text-lg">Using vanilla Javascript and powered by Notion Database</p>
           <p class="text-lg">You can add any question 
             <a 
