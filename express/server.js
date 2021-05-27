@@ -2,6 +2,7 @@ const dotenv = require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const express = require("express");
 const serverless = require("serverless-http");
+const bodyParser = require("body-parser");
 
 const PORT = process.env.PORT | 4000;
 
