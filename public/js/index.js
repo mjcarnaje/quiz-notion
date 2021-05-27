@@ -11,7 +11,7 @@ const dataController = (() => {
   return {
     getQuestions: async () => {
       const response = await fetch(
-        "https://netlify-express.netlify.com/.netlify/functions/server/questions"
+        "https://simple-quiz-application.netlify.app/.netlify/functions/server/questions"
       );
       const responseJSON = await response.json();
       data.questions = [...responseJSON];
