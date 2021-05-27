@@ -4,7 +4,8 @@
   "description": "using notion-api",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "generate_tailwindcss": "npx postcss ./public/css/tailwind.css -o ./public/css/style.css"
   },
   "keywords": [
     "quiz"
@@ -15,5 +16,10 @@
     "@notionhq/client": "^0.1.8",
     "dotenv": "^10.0.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.6",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.2"
   }
 }
