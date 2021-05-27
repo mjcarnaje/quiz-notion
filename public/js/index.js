@@ -45,7 +45,7 @@ const dataController = (() => {
 
       if (data.currentQuestion.answer.id == selected) {
         correct = true;
-        data.score += 10;
+        data.score += 1;
       } else {
         correct = false;
       }
