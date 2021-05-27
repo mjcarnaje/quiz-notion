@@ -215,7 +215,16 @@ const controller = ((dataController, UIController) => {
     const DOM = UIController.getDOMStrings();
 
     document.getElementById(DOM.container).addEventListener("click", playAgain);
-    document.getElementById(DOM.container).addEventListener("click", startGame);
+    document.getElementById(DOM.container).addEventListener("click", () => {
+      if (
+        event.target.getAttribute("id") === "startButton" ||
+        event.target.parentNode?.getAttribute("id") === "startButton" ||
+        event.target.parentNode?.parentNode?.getAttribute("id") ===
+          "startButton"
+      ) {
+        startGame();
+      }
+    });
     document
       .getElementById(DOM.container)
       .addEventListener("click", selectAnswer);
@@ -226,18 +235,12 @@ const controller = ((dataController, UIController) => {
   };
 
   async function startGame(event) {
-    if (
-      event.target.getAttribute("id") === "startButton" ||
-      event.target.parentNode?.getAttribute("id") === "startButton" ||
-      event.target.parentNode?.parentNode?.getAttribute("id") === "startButton"
-    ) {
-      UIController.clearContainer();
-      UIController.renderLoading();
-      await dataController.getQuestions();
-      UIController.clearContainer();
-      const question = dataController.getQuestion();
-      UIController.renderQuestion(question);
-    }
+    UIController.clearContainer();
+    UIController.renderLoading();
+    await dataController.getQuestions();
+    UIController.clearContainer();
+    const question = dataController.getQuestion();
+    UIController.renderQuestion(question);
   }
 
   function selectAnswer(event) {
