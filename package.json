@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "build": "postcss public/css/tailwind.css -o public/css/style.css"
+    "build": "netlify-lambda build express"
   },
   "keywords": [
     "quiz"
@@ -17,8 +17,10 @@
     "autoprefixer": "^10.2.6",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "netlify-lambda": "^2.0.7",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
+    "serverless-http": "^2.7.0",
     "tailwindcss": "^2.1.2",
     "tailwindcss-cli": "^0.1.2"
   }

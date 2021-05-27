@@ -10,7 +10,9 @@ const dataController = (() => {
 
   return {
     getQuestions: async () => {
-      const response = await fetch("http://localhost:4000/questions");
+      const response = await fetch(
+        "https://netlify-express.netlify.com/.netlify/functions/server/questions"
+      );
       const responseJSON = await response.json();
       data.questions = [...responseJSON];
       data.currentQuestion = data.questions[data.currentIndex];
