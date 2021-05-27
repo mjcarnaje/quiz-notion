@@ -38,12 +38,15 @@ const getQuestions = async () => {
 
 const app = express();
 
+const router = express.Router();
+
 app.use(express.static("public"));
-app.get("/questions", async (req, res) => {
+router.get("/questions", async (req, res) => {
   const questions = await getQuestions();
   res.json(questions);
 });
-app.use("/.netlify/functions/server");
+app.use(bodyParser.json());
+app.use("/.netlify/functions/server", router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
