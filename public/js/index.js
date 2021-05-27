@@ -215,9 +215,7 @@ const controller = ((dataController, UIController) => {
     const DOM = UIController.getDOMStrings();
 
     document.getElementById(DOM.container).addEventListener("click", playAgain);
-    document
-      .getElementById(DOM.startButton)
-      .addEventListener("click", startGame);
+    document.getElementById(DOM.container).addEventListener("click", startGame);
     document
       .getElementById(DOM.container)
       .addEventListener("click", selectAnswer);
@@ -227,13 +225,19 @@ const controller = ((dataController, UIController) => {
     document.getElementById(DOM.container).addEventListener("click", goToHome);
   };
 
-  async function startGame() {
-    UIController.clearContainer();
-    UIController.renderLoading();
-    await dataController.getQuestions();
-    UIController.clearContainer();
-    const question = dataController.getQuestion();
-    UIController.renderQuestion(question);
+  async function startGame(event) {
+    if (
+      event.target.getAttribute("id") === "startButton" ||
+      event.target.parentNode?.getAttribute("id") === "startButton" ||
+      event.target.parentNode?.parentNode?.getAttribute("id") === "startButton"
+    ) {
+      UIController.clearContainer();
+      UIController.renderLoading();
+      await dataController.getQuestions();
+      UIController.clearContainer();
+      const question = dataController.getQuestion();
+      UIController.renderQuestion(question);
+    }
   }
 
   function selectAnswer(event) {
@@ -258,7 +262,7 @@ const controller = ((dataController, UIController) => {
     if (
       event.target.getAttribute("id") === "nextButton" ||
       event.target.parentNode?.getAttribute("id") === "nextButton" ||
-      event.target.parentNode.parentNode?.getAttribute("id") === "nextButton"
+      event.target.parentNode?.parentNode?.getAttribute("id") === "nextButton"
     ) {
       dataController.nextQuestion();
       const question = dataController.getQuestion();
