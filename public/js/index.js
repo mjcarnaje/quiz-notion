@@ -159,7 +159,7 @@ const UIController = (() => {
             <div class='flex flex-col space-y-2'>
               <button id="playAgain"
                 class="transition-colors bg-blue-500 text-white text-lg font-semibold px-6 py-2 rounded-md focus:outline-none hover:bg-blue-600">
-                Next
+                Play Again
               </button>
               <button id="goToHome"
                 class="transition-colors bg-blue-500 text-white text-lg font-semibold px-6 py-2 rounded-md focus:outline-none hover:bg-blue-600">
