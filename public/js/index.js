@@ -213,25 +213,31 @@ const UIController = (() => {
 const controller = ((dataController, UIController) => {
   const setupEventListeners = () => {
     const DOM = UIController.getDOMStrings();
-
-    document.getElementById(DOM.container).addEventListener("click", playAgain);
-    document.getElementById(DOM.container).addEventListener("click", () => {
-      if (
-        event.target.getAttribute("id") === "startButton" ||
-        event.target.parentNode?.getAttribute("id") === "startButton" ||
-        event.target.parentNode?.parentNode?.getAttribute("id") ===
-          "startButton"
-      ) {
-        startGame();
-      }
-    });
     document
       .getElementById(DOM.container)
-      .addEventListener("click", selectAnswer);
-    document
-      .getElementById(DOM.container)
-      .addEventListener("click", nextQuestion);
-    document.getElementById(DOM.container).addEventListener("click", goToHome);
+      .addEventListener("click", (event) => {
+        if (
+          event.target.getAttribute("id") === "startButton" ||
+          event.target.parentNode?.getAttribute("id") === "startButton" ||
+          event.target.parentNode?.parentNode?.getAttribute("id") ===
+            "startButton"
+        ) {
+          startGame(event);
+        } else if (event.target.getAttribute("choiceId")) {
+          selectAnswer(event);
+        } else if (
+          event.target.getAttribute("id") === "nextButton" ||
+          event.target.parentNode?.getAttribute("id") === "nextButton" ||
+          event.target.parentNode?.parentNode?.getAttribute("id") ===
+            "nextButton"
+        ) {
+          nextQuestion(event);
+        } else if (event.target.getAttribute("id") === "playAgain") {
+          playAgain(event);
+        } else if (event.target.getAttribute("id") === "goToHome") {
+          goToHome(event);
+        }
+      });
   };
 
   async function startGame(event) {
@@ -244,56 +250,44 @@ const controller = ((dataController, UIController) => {
   }
 
   function selectAnswer(event) {
-    if (event.target.getAttribute("choiceId")) {
-      const correct = dataController.checkAnswer({
-        selected: event.target.getAttribute("choiceId"),
-      });
+    const correct = dataController.checkAnswer({
+      selected: event.target.getAttribute("choiceId"),
+    });
 
-      const question = dataController.getQuestion();
+    const question = dataController.getQuestion();
 
-      UIController.checkAnswer({
-        answerId: question.answer.id,
-        selected: event.target.getAttribute("choiceId"),
-        correct,
-      });
+    UIController.checkAnswer({
+      answerId: question.answer.id,
+      selected: event.target.getAttribute("choiceId"),
+      correct,
+    });
 
-      UIController.renderNextButton();
-    }
+    UIController.renderNextButton();
   }
 
   function nextQuestion(event) {
-    if (
-      event.target.getAttribute("id") === "nextButton" ||
-      event.target.parentNode?.getAttribute("id") === "nextButton" ||
-      event.target.parentNode?.parentNode?.getAttribute("id") === "nextButton"
-    ) {
-      dataController.nextQuestion();
-      const question = dataController.getQuestion();
-      const scorePercentage = dataController.getPercentage();
+    dataController.nextQuestion();
+    const question = dataController.getQuestion();
+    const scorePercentage = dataController.getPercentage();
 
-      if (!question) {
-        UIController.clearContainer();
-        UIController.renderScorePlayAgain({ scorePercentage });
-      } else {
-        UIController.renderQuestion(question);
-      }
+    if (!question) {
+      UIController.clearContainer();
+      UIController.renderScorePlayAgain({ scorePercentage });
+    } else {
+      UIController.renderQuestion(question);
     }
   }
 
   function playAgain(event) {
-    if (event.target.getAttribute("id") === "playAgain") {
-      UIController.clearContainer();
-      dataController.resetQuiz();
-      startGame();
-    }
+    UIController.clearContainer();
+    dataController.resetQuiz();
+    startGame();
   }
 
   function goToHome(event) {
-    if (event.target.getAttribute("id") === "goToHome") {
-      UIController.clearContainer();
-      dataController.resetQuiz();
-      UIController.renderHome();
-    }
+    UIController.clearContainer();
+    dataController.resetQuiz();
+    UIController.renderHome();
   }
 
   return {
