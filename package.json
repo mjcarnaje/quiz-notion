@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "build": "netlify-lambda build express"
+    "build": "netlify-lambda build express && npm run build-css",
+    "build-css": "postcss public/css/tailwind.css -o public/css/style.css"
   },
   "keywords": [
     "quiz"
